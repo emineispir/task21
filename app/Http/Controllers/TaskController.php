@@ -14,8 +14,6 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     public function index() {
-        $test = Task::factory()->create();
-
         $tasks = Task::orderBy('status')->get();
         return TaskResource::collection($tasks);
     }

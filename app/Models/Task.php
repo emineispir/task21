@@ -12,7 +12,6 @@ class Task extends Model
     const DOING = 0;
     const TODO = 1;
     const DONE = 2;
-    use HasFactory;
     protected $fillable = ['title', 'description','status', 'user_id'];
 
     public function assignedUser() {
@@ -21,7 +20,11 @@ class Task extends Model
 
     public function scopeSortByStatus($query)
     {
-        return $query->orderBy("status", 'ASC');
+        return $query->orderBy("status", 'ASC')->get()->sortBy([
+            'status', 'ASC',
+            "title", SORT_LOCALE_STRING,
+        ]);
+    
     }
 }
 
